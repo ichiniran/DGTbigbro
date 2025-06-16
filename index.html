@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>DGTน้องหาพี่</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jersey+20&display=swap');
+    body {
+      background-color: #4089FF;
+      font-family: "Kanit";
+      font-size: 25px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .DGT {
+      font-family: "Jersey 20", sans-serif;
+      font-size: 200px;
+      color: #FFFF;
+      text-shadow:
+        -5px -5px 0 rgba(0, 0, 0, 0.100),
+         5px -5px 0 rgba(0, 0, 0, 0.100),
+        -5px  5px 0 rgba(0, 0, 0, 0.100),
+         5px 5px 0 rgba(0, 0, 0, 0.100);
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-top: 30px;
+    }
+
+    .rounded-input {
+      font-family: "Kanit";
+      font-size: 20px;
+      width: 250px;
+      padding: 12px 45px 12px 20px;
+      border: 1px solid #ccc;
+      border-radius: 40px;
+      outline: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #555;
+      cursor: pointer;
+    }
+
+    .search-icon:hover {
+      color: #000;
+    }
+
+    .hint-box {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #ffffff;
+    
+    }
+    .link-button {
+      font-family: "Kanit";
+      width: 100px;
+      font-weight: 700;
+      font-size: 20px;
+      background-color: #fff;
+      color: #000000;
+      padding: 12px 25px;
+      margin: 10px;
+      border-radius: 40px;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.041);
+      display: inline-block;
+    }
+
+    .link-button:hover {
+      background-color: #fdffbf;
+    }
+
+  </style>
+</head>
+<body oncontextmenu="return false">
+  <div class="DGT"> DGT </div> 
+  <div style="font-size: 40px; color: #FFFF; margin-top: -20px;">น้องหาพี่ดิจิเทค</div>
+
+  <div class="input-wrapper">
+    <input type="text" id="studentId" class="rounded-input" placeholder="กรอกรหัสนักศึกษา" onkeydown="if(event.key==='Enter'){searchHint()}">
+    <i class="fas fa-search search-icon" onclick="searchHint()"></i>
+  </div>
+  <br>
+  <div class="hint-box" id="hintResult"></div>
+  <div style="margin-top: 40px;">
+    <a href="dt.html" class="link-button">รุ่นพี่ DT</a><br>
+    <a href="dc.html" class="link-button">รุ่นพี่ DC</a>
+  </div>
+
+  <script>
+    const studentHints = {
+      "65010001": "ชอบเล่นบอร์ดเกมและคุยสนุก",
+      "65010002": "สะพายกระเป๋าแมวและชอบแมวมาก",
+      "65010003": "ชอบกินส้มตำเผ็ดๆ ทุกวัน",
+      "65010004": "สายดูอนิเมะ One Piece ห้ามพลาด",
+       "6703776": {
+    text: "ผมชื่อเอโดงาว่า โคนัน ตัวจริงคือ คุโด้ ชินอิจิ ที่โดนยาพิษจนกลายเป็นเด็ก ถึงจะตัวเล็ก แต่ สมองก็ยังคงเป็นยอดนักสืบคนเดิม ความจริงก็มีเพียงหนึ่งเดียวเท่านั้น",
+    image: "0c56799b8f9872257034c8d3a5ae68fd.jpg"
+  },
+    };
+
+    function searchHint() {
+  const studentId = document.getElementById("studentId").value.trim();
+  const hintResult = document.getElementById("hintResult");
+
+  if (studentId === "") {
+    hintResult.textContent = "กรอกรหัสนักศึกษาก่อนน้า";
+    return;
+  }
+
+  const hint = studentHints[studentId];
+
+  if (hint) {
+    if (typeof hint === 'object' && hint.text && hint.image) {
+      // กรณี hint เป็น object มีทั้ง text กับ image
+      hintResult.style.display = "inline-block";
+      hintResult.innerHTML = `
+        <strong>คำใบ้</strong><br>
+        ${hint.text}<br>
+        <img src="${hint.image}" alt="รูปคำใบ้" style="max-width: 50%; border-radius: 0px; margin-top: 15px;">
+      `;
+    } else if (typeof hint === 'string') {
+      // กรณี hint เป็น string ธรรมดา
+      hintResult.style.display = "inline-block";
+      hintResult.innerHTML = `<strong>คำใบ้</strong><br>${hint}`;
+    } else {
+      hintResult.textContent = "ข้อมูลคำใบ้ไม่ถูกต้อง";
+    }
+  } else {
+    hintResult.textContent = "ไม่พบรหัสนักศึกษานี้";
+  }
+}
+
+  </script>
+</body>
+</html>
