@@ -25,6 +25,7 @@
          5px -5px 0 rgba(0, 0, 0, 0.100),
         -5px  5px 0 rgba(0, 0, 0, 0.100),
          5px 5px 0 rgba(0, 0, 0, 0.100);
+         
     }
 
     .input-wrapper {
@@ -102,40 +103,47 @@
   <br>
   <div class="hint-box" id="hintResult"></div>
   <div style="margin-top: 40px;">
-    <span style="color: #ffffff; font-size: 20px;">ช่องทางตามหาพี่ๆ</span> <br>
+    <span style="color: #ffffff; font-size: 20px; text-align: center;">ช่องทางตามหาพี่ๆ</span> <br>
     <a href="dc.html" class="link-button">รุ่นพี่ DC#5</a><br>
     <a href="dt.html" class="link-button">รุ่นพี่ DT#5</a>
     
   </div>
 
   <script>
-    const studentHints = {
-      "65010001": "ชอบเล่นบอร์ดเกมและคุยสนุก",
-      "65010002": "สะพายกระเป๋าแมวและชอบแมวมาก",
-      "65010003": "ชอบกินส้มตำเผ็ดๆ ทุกวัน",
-      "65010004": "สายดูอนิเมะ One Piece ห้ามพลาด",
-      "B6703776": "มะม่วงสายdata🥭🥭🥭💥💥💥",
-    };
+      const studentHints = [
+  { id: "65010001", name: "สมชาย หมายปอง", hint: "ชอบเล่นบอร์ดเกมและคุยสนุก" },
+  { id: "65010002", name: "อรทัย", hint: "สะพายกระเป๋าแมวและชอบแมวมาก" },
+  { id: "65010003", name: "จักรพงษ์", hint: "ชอบกินส้มตำเผ็ดๆ ทุกวัน" },
+  { id: "65010004", name: "มายด์", hint: "สายดูอนิเมะ One Piece ห้ามพลาด" },
+  { id: "B6703776", name: "น้ำฝน", hint: "มะม่วงสายdata🥭🥭🥭💥💥💥" },
+];
+
 
     function searchHint() {
-  const studentId = document.getElementById("studentId").value.trim();
-  const hintResult = document.getElementById("hintResult");
+    const input = document.getElementById("studentId").value.trim().toLowerCase();
+    const hintResult = document.getElementById("hintResult");
 
-  if (studentId === "") {
-    hintResult.textContent = "กรอกรหัสนักศึกษาก่อนน้า";
-    return;
-  }
+    if (input === "") {
+        hintResult.textContent = "กรอกรหัสนักศึกษาหรือชื่อก่อนน้า";
+        return;
+    }
 
-  const hint = studentHints[studentId];
+    const match = studentHints.find(student =>
+        student.id.toLowerCase() === input || student.name.toLowerCase() === input
+    );
 
-  if (hint) {
-      hintResult.style.display = "inline-block";
-      hintResult.innerHTML = `<strong>คำใบ้</strong><br>
-      <div style="text-align: center; max-width: 500px; margin: 0 auto;">${hint}</div>`;
-  } else {
-    hintResult.textContent = "ไม่พบรหัสนักศึกษานี้";
-  }
-}
+    if (match) {
+        hintResult.style.display = "inline-block";
+        hintResult.innerHTML = `<strong>คำใบ้</strong><br>
+        <div style="text-align: center; max-width: 500px; margin: 0 auto;">
+        ${match.hint} 
+        </div>`;
+    } else {
+        hintResult.textContent = "ไม่พบรหัสหรือชื่อนี้";
+    }
+    }
+
+
 
   </script>
 </body>
