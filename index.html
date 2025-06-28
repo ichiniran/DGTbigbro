@@ -106,13 +106,13 @@
   <div style="margin-top: 10px;">
     <span style="color: #ffffff; font-size: 20px; text-align: center;">ช่องทางตามหาพี่ๆ</span><br>
     <a href="dc.html" class="link-button">รุ่นพี่ DC#5</a><br>
-    <a href="dt.html" class="link-button">รุ่นพี่ DT#5</a><br>
+    <a href="dt.html" class="link-button">รุ่นพี่ DT#5</a>
     
   </div>
 
   <script>
       const studentHints = [
-  { id: "65010001", name: "สมชาย หมายปอง", hint: "ชอบเล่นบอร์ดเกมและคุยสนุก" },
+  { id: "B6812345", name: "ลิลลี่ จะบังพี่ทำไม", hint: "หญิงเดาทางพี่เกดออกนะ แต่พี่เกดล่ะเดาทางหญิงออกรึเปล่า" },
   { id: "65010002", name: "อรทัย", hint: "สะพายกระเป๋าแมวและชอบแมวมาก" },
   { id: "65010003", name: "จักรพงษ์", hint: "ชอบกินส้มตำเผ็ดๆ ทุกวัน" },
   { id: "65010004", name: "มายด์", hint: "สายดูอนิเมะ One Piece ห้ามพลาด" },
@@ -135,8 +135,8 @@
 
     if (match) {
         hintResult.style.display = "inline-block";
-        hintResult.innerHTML = `<strong>คำใบ้</strong><br>
-        <div style="text-align: center; max-width: 500px; margin: 0 auto;">
+        hintResult.innerHTML = `<strong style ='color: #ffc157;'>คำใบ้</strong><br>
+        <div style="text-align: center; max-width: 400px; margin: 10px auto;">
         ${match.hint} 
         </div>`;
     } else {
